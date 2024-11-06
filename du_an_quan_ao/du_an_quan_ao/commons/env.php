@@ -14,3 +14,4 @@ define('DB_PASSWORD', '');
 define('DB_NAME'    , 'ban_cong_so_nam');  // Tên database
 
 define('PATH_ROOT'    , __DIR__ . '/../');
+//Test
