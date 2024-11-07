@@ -10,7 +10,7 @@ class HomeController
     }
 
     public function home(){
-        echo "Đây là trang home 1233";
+        echo "Đây là trang home 123";
     }
     
     public function trangchu(){
