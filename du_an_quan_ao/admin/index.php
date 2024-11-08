@@ -17,6 +17,11 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // route
-    'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(), 
+    'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
+    'form-create-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
+    'create-danh-muc' => (new AdminDanhMucController())->AddDanhMuc(),
+    'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
+    'sua-danh-muc' => (new AdminDanhMucController())->editDanhMuc(),
+    
    
 };
