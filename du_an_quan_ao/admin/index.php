@@ -16,12 +16,18 @@ $act = $_GET['act'] ?? '/';
 
 
 match ($act) {
-    // route
+    // route danh mục
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
     'form-create-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
     'create-danh-muc' => (new AdminDanhMucController())->AddDanhMuc(),
     'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
     'sua-danh-muc' => (new AdminDanhMucController())->editDanhMuc(),
     
+    //route sản phẩm
+    'san-pham' => (new AdminSanPhamController())->danhSachSanPham(),
+    // 'form-create-san-pham' => (new AdminSanPhamController())->formAddSanPham(),
+    // 'create-san-pham' => (new AdminSanPhamController())->AddSanPham(),
+    // 'form-sua-san-pham' => (new AdminSanPhamController())->formEditSanPham(),
+    // 'sua-san-phãm' => (new AdminSanPhamController())->editSanPham(),
    
 };
