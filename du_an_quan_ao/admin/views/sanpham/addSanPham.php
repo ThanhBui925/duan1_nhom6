@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý danh mục sản phẩm</h1>
+                    <h1>Quản lý sản phẩm</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -82,7 +82,7 @@
 
                                 <div class="form-group col-6">
                                     <label>Ngày nhập</label>
-                                    <input type="date" class="form-control" name="ngay_nhap" value="<?= $_POST['ngay_nhap'] ? $_POST['ngay_nhap'] : '' ?>" placeholder="Nhập hình ảnh">
+                                    <input type="date" id="ngay_nhap" class="form-control" name="ngay_nhap" value="<?= $_POST['ngay_nhap'] ? $_POST['ngay_nhap'] : '' ?>" placeholder="Nhập hình ảnh">
                                     <?php if(isset($errors['ngay_nhap'])): ?>
                                         <p class="text-danger"><?= $errors['ngay_nhap'] ?></p>
                                     <?php endif; ?>
@@ -150,6 +150,13 @@
             <?php endif; ?>
         <?php endforeach; ?>
     <?php endif; ?>
+</script>
+<script>
+    // Set giá trị của input date thành ngày hôm nay
+    document.addEventListener("DOMContentLoaded", function() {
+        var today = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại và chuyển về định dạng YYYY-MM-DD
+        document.getElementById("ngay_nhap").value = today; // Cập nhật giá trị cho input ngày
+    });
 </script>
 </body>
 </html>
