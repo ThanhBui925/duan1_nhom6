@@ -54,20 +54,21 @@ class AdminDanhMuc{
     public function updateDanhMuc($id, $tenDanhMuc, $moTa){
         try {
             $sql = "UPDATE categories SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta WHERE id = :id";
-
+    
             $stmt = $this->conn->prepare($sql);
-
+    
             $stmt->execute([
-                ':tenDanhMuc' => $tenDanhMuc,
-                ':moTa' => $moTa,
+                ':ten_danh_muc' => $tenDanhMuc,
+                ':mo_ta' => $moTa,
                 ':id' => $id
             ]);
-
+    
             return true;
         } catch(Exception $e){
-            echo "Lỗi".      $e->getMessage();
+            echo "Lỗi: " . $e->getMessage();
         }
     }
+    
 }
 
 ?>

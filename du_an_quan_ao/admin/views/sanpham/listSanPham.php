@@ -57,10 +57,10 @@
                         <tr>
                           <td><?= $key+1?></td>
                           <td><?= $sanPham["ten_san_pham"] ?></td>
-                          <td><img style="width: 70px" src= "<?= BASE_URL. $sanPham['hinh_anh'] ?>" alt=""></td>
+                          <td><img style="width: 70px" src= "<?= $sanPham['hinh_anh'] ?>" alt=""></td>
                           <td><?= $sanPham["gia_san_pham"] ?></td>
                           <td><?= $sanPham["so_luong"] ?></td>
-                          <td><?= $sanPham["danh_muc_id"] ?></td>
+                          <td><?= $sanPham["ten_danh_muc"] ?></td>
                           <td><?= $sanPham["trang_thai"] ?></td>
                           <td>
                             <a href="<?= BASE_URL_ADMIN.'?act=form-sua-san-pham&id_san_pham=' . $sanPham['id'] ?>">

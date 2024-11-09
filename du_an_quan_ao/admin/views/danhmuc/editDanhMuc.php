@@ -37,7 +37,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               <form action="<?= BASE_URL_ADMIN.'?act=sua-danh-muc' ?>" method="post">
-                <input type="text" value="<?=$danhMuc['id']?>" hidden>
+                <input type="text" name="id" value="<?=$danhMuc['id']?>" hidden>
                 <div class="card-body">
                   <div class="form-group">
                     <label >Tên danh mục</label>

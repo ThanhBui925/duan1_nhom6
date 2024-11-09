@@ -8,7 +8,10 @@ class AdminSanPham{
     }
     public function getAllSanPham(){
         try{
-            $sql = "SELECT * FROM products";
+            $sql = "SELECT products.*, categories.ten_danh_muc
+        FROM products
+        INNER JOIN categories ON products.category_id = categories.id";
+
 
             $stmt = $this->conn->prepare($sql);
 
