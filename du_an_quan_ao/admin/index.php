@@ -26,7 +26,7 @@ match ($act) {
     
     //route sản phẩm
     'san-pham' => (new AdminSanPhamController())->danhSachSanPham(),
-    // 'form-create-san-pham' => (new AdminSanPhamController())->formAddSanPham(),
+    'create-san-pham' => (new AdminSanPhamController())->formAddSanPham(),
     // 'create-san-pham' => (new AdminSanPhamController())->AddSanPham(),
     // 'form-sua-san-pham' => (new AdminSanPhamController())->formEditSanPham(),
     // 'sua-san-phãm' => (new AdminSanPhamController())->editSanPham(),

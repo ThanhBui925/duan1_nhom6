@@ -32,7 +32,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="<?= BASE_URL_ADMIN.'?act=form-create-san-pham' ?>">
+                <a href="<?= BASE_URL_ADMIN.'?act=create-san-pham' ?>">
                   <button class="btn btn-success">Thêm sản phẩm</button>
                 </a>
               </div>
@@ -57,11 +57,16 @@
                         <tr>
                           <td><?= $key+1?></td>
                           <td><?= $sanPham["ten_san_pham"] ?></td>
-                          <td><img style="width: 70px" src= "<?= $sanPham['hinh_anh'] ?>" alt=""></td>
+                          <td>
+                            <img style="width: 60px" src= "<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
+                            onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg2IWOhm7wMIde-u1ePywcsBY6iN1--pwXCQ&s'"
+                            >
+                            
+                          </td>
                           <td><?= $sanPham["gia_san_pham"] ?></td>
                           <td><?= $sanPham["so_luong"] ?></td>
                           <td><?= $sanPham["ten_danh_muc"] ?></td>
-                          <td><?= $sanPham["trang_thai"] ?></td>
+                          <td><?= $sanPham["trang_thai"] == 1 ? 'Còn hàng' : 'Hết hàng' ?></td>
                           <td>
                             <a href="<?= BASE_URL_ADMIN.'?act=form-sua-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                               <button class="btn btn-warning">Sửa</button>
