@@ -57,7 +57,10 @@
                             <a href="<?= BASE_URL_ADMIN.'?act=form-sua-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>">
                               <button class="btn btn-warning">Sửa</button>
                             </a>
-                            <button class="btn btn-danger">Xóa</button>
+                            <a href="<?= BASE_URL_ADMIN.'?act=xoa-danh-muc&id_danh_muc=' . $danhMuc['id'] ?>" 
+                              onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không ?')">
+                              <button class="btn btn-danger">Xóa</button>
+                            </a>
                           </td>
                         </tr>
                     <?php endforeach ?>

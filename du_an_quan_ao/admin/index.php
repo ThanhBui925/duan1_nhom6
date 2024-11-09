@@ -22,6 +22,7 @@ match ($act) {
     'create-danh-muc' => (new AdminDanhMucController())->AddDanhMuc(),
     'form-sua-danh-muc' => (new AdminDanhMucController())->formEditDanhMuc(),
     'sua-danh-muc' => (new AdminDanhMucController())->editDanhMuc(),
+    'xoa-danh-muc' => (new AdminDanhMucController())->deleteDanhMuc(),
     
     //route sản phẩm
     'san-pham' => (new AdminSanPhamController())->danhSachSanPham(),

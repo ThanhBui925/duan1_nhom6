@@ -35,7 +35,10 @@ class AdminDanhMucController{
         //Nếu k có lỗi thì tiến hành thêm danh mục
         if(empty($errors)){
           $this->modelDanhMuc->insertDanhMuc($tenDanhMuc, $moTa);
-          header("location: " . BASE_URL_ADMIN . '?act=danh-muc');
+          echo "<script>
+                  alert('Thêm danh mục thành công');
+                  window.location.href = '" . BASE_URL_ADMIN . "?act=danh-muc';
+                  </script>";
           exit();
         }else{
           require_once './views/danhmuc/addDanhMuc.php';
@@ -75,7 +78,10 @@ class AdminDanhMucController{
   
               if ($result) {
                   // Nếu cập nhật thành công, chuyển hướng về trang danh mục
-                  header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
+                  echo "<script>
+                  alert('Sửa danh mục thành công');
+                  window.location.href = '" . BASE_URL_ADMIN . "?act=danh-muc';
+                  </script>";
                   exit();
               } else {
                   // Nếu thất bại, hiển thị lỗi chung
@@ -87,6 +93,19 @@ class AdminDanhMucController{
               require_once './views/danhmuc/editDanhMuc.php';
           }
       }
+  }
+  public function deleteDanhMuc(){
+    $id = $_GET['id_danh_muc'];
+    $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
+    if($danhMuc){
+      $this->modelDanhMuc->destroyDanhMuc($id);
+      
+      echo "<script>
+                alert('Xóa thành công danh mục');
+                window.location.href = '" . BASE_URL_ADMIN . "?act=danh-muc';
+              </script>";
+        exit();
+    }
   }
   
 }

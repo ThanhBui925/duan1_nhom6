@@ -68,6 +68,21 @@ class AdminDanhMuc{
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function destroyDanhMuc($id){
+        try {
+            $sql = "DELETE FROM categories WHERE id = :id";
+    
+            $stmt = $this->conn->prepare($sql);
+    
+            $stmt->execute([
+                ':id' => $id
+            ]);
+    
+            return true;
+        } catch(Exception $e){
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
     
 }
 
