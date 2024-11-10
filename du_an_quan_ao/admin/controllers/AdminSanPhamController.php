@@ -113,7 +113,8 @@ class AdminSanPhamController{
     public function formEditSanPham(){
       $id = $_GET['id_san_pham'];
       $sanPham = $this->modelSanPham->getDetailSanPham($id);
-      $listAnhSanPham = $this->modelSanPham->getDetailSanPham($id);
+      $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+    // var_dump($listAnhSanPham);die();
       $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         //Lấy dữ liệu
@@ -198,6 +199,62 @@ class AdminSanPhamController{
       }
 
     }
+    public function editAnhSanPham(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          $product_id = $_POST['product_id'] ?? '';
+          //Lấy danh sách ảnh sản phẩm hiện tại
+          $listAnhSanPhamCurrent = $this->modelSanPham->getListAnhSanPham($product_id);
+          //Xử lý các ảnh được gửi từ form
+          $img_array = $_FILES['img_array'];
+          $img_delete = isset($_POST['img_delete']) ? explode(',', $_POST['img_delete']) : [];
+          $current_img_ids = $_POST['current_img_ids'] ?? [];
+          
+          //Khai báo mảng để lưu ảnh thêm mới hoăc thay thế
+          $upload_file = [];
+          foreach($img_array['name'] as $key=>$value){
+            if($img_array['error'][$key] == UPLOAD_ERR_OK){
+              $new_file = uploadFileAlbum($img_array, './uploads/', $key);
+              if($new_file){
+                $upload_file[] = [
+                  'id' => $current_img_ids[$key] ?? null,
+                  'file' => $new_file
+                ];
+              }
+            }
+          }
+          //Lưu ảnh mới vào db và xóa ảnh cũ
+          foreach($upload_file as $file_info){
+            if($file_info['id']){
+              $old_file = $this->modelSanPham->getDetailAnhSanPham($file_info['id'])['link_hinh_anh'];
+              //Cập nhật ảnh cũ
+              $this->modelSanPham->updateAnhSanPham($file_info['id'], $file_info['file']);
+              //Xóa ảnh cũ
+              deleteFile($old_file);
+            }else{
+              //thêm ảnh mới
+              $this->modelSanPham->insertAlbumAnhSanPham($product_id, $file_info['file']);
+            }
+          }
+          //xử lý xóa ảnh
+          foreach($listAnhSanPhamCurrent as $anhSanPham){
+            $anh_id = $anhSanPham['id'];
+            if(in_array($anh_id, $img_delete)){
+              //Xóa ảnh
+              $this->modelSanPham->destroyAnhSanPham($anh_id);
+              //xóa file
+              deleteFile($anhSanPham['link_hinh_anh']);
+            }
+          }
+          echo "<script>
+            window.location.href = '" . BASE_URL_ADMIN . "?act=san-pham';
+            </script>";
+            exit();
+      }
+  }
+    //sửa album ảnh
+
+    //k sửa ảnh cũ
+    // xóa ảnh cũ
     
     
 }

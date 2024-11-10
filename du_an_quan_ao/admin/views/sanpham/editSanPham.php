@@ -127,7 +127,7 @@
           <div class="card card-info">
             <div class="card-header">
               <h3 class="card-title">Album ảnh sản phẩm</h3>
-
+            
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                   <i class="fas fa-minus"></i>
@@ -135,9 +135,44 @@
               </div>
             </div>
             <div class="card-body p-0">
-              
+                <div class="padding">
+                    <div class="table-responsive">
+                    <form action="'?act=sua-album-anh-san-pham" method="post" enctype="multipart/form-data">
+                
+                        <table id="faqs" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>File</th>
+                                    <th>
+                                        <div class="text-center"><button onclick="addfaqs();" type="button" class="badge badge-success"><i class="fa fa-plus"></i> Add</button></div>
+                                    </th>
+                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <input type="hidden" name="product_id" value="<?= $sanPham['id'] ?>">
+                                <input type="hidden" id="img_delete" name="img_delete">
+                                <?php foreach($listAnhSanPham as $key=>$value):?>
+                                <tr id="faqs-row-<?= $key ?>">
+                                    <input type="hidden" name="current_img_ids[]" value="<?= $value['id'] ?>">
+                                    <td><img src="<?= BASE_URL . $value['link_hinh_anh'] ?>" style="width: 50px; height:50px" alt=""></td>
+                                    <td><input type="file" name="img_array[]" placeholder="Product name" class="form-control"></td>
+                                    <td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow(<?= $key ?>,<?= $value['id'] ?>)"><i class="fa fa-trash"></i> Delete</button></td>
+                                </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
             </div>
-            <!-- /.card-body -->
+             <!-- /.card-body -->
+             <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary">Sửa album</button>
+             </div>
+             </form>
+
           </div>
           <!-- /.card -->
         </div>
@@ -176,6 +211,51 @@
         var today = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại và chuyển về định dạng YYYY-MM-DD
         document.getElementById("ngay_nhap").value = today; // Cập nhật giá trị cho input ngày
     });
+    // Đếm số hàng để đảm bảo id duy nhất
+// Biến đếm số hàng để đảm bảo id duy nhất cho mỗi hàng
+var faqs_row = <?= count($listAnhSanPham) ?>;
+
+// Hàm thêm hàng mới vào bảng album ảnh sản phẩm
+function addfaqs() {
+    var html = '<tr id="faqs-row-' + faqs_row + '">';
+    html += '<td><img id="img-preview-' + faqs_row + '" src="https://via.placeholder.com/50" style="width: 50px; height:50px" alt="Ảnh sản phẩm"></td>';
+    html += '<td><input type="file" name="img_array[]" class="form-control" onchange="previewImage(this, \'img-preview-' + faqs_row + '\')"></td>';
+    html += '<td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow('+ faqs_row +', null);"><i class="fa fa-trash"></i> Delete</button></td>';
+    html += '</tr>';
+
+    // Thêm hàng mới vào bảng tbody
+    $('#faqs tbody').append(html);
+
+    // Tăng số hàng lên
+    faqs_row++;
+}
+
+// Hàm xem trước ảnh sau khi người dùng chọn file ảnh
+function previewImage(input, imgId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // Đặt ảnh từ FileReader vào src của thẻ img với id tương ứng
+            document.getElementById(imgId).src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]); // Đọc file thành DataURL
+    }
+}
+
+// Hàm xóa hàng ảnh khỏi bảng và thêm id ảnh cần xóa vào img_delete nếu có
+function removeRow(rowId, imgId){
+    // Xóa hàng hiện tại dựa trên rowId
+    $('#faqs-row-' + rowId).remove();
+
+    // Nếu imgId có giá trị (tức là ảnh đã tồn tại), thêm id vào input img_delete
+    if(imgId !== null){
+        var imgDeleteInput = document.getElementById('img_delete');
+        var currentValue = imgDeleteInput.value;
+        imgDeleteInput.value = currentValue ? currentValue + ',' + imgId : imgId;
+    }
+}
+</script>
+
 </script>
 </body>
 </html>

@@ -90,7 +90,7 @@ class AdminSanPham{
 
             $stmt = $this->conn->prepare($sql);
 
-            $stmt->execute([':product_id'=>$id]);
+            $stmt->execute([':id'=>$id]);
 
             return $stmt->fetchAll();
         }catch(Exception $e){
@@ -137,6 +137,55 @@ class AdminSanPham{
             echo "Lỗi".      $e->getMessage();
         }
     }
+    public function getDetailAnhSanPham($id){
+        try{
+            $sql = "SELECT * FROM product_images WHERE id = :id";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id'=>$id]);
+
+            return $stmt->fetch();
+        }catch(Exception $e){
+            echo "Lỗi".      $e->getMessage();
+        }   
+    }
+    public function updateAnhSanPham($id, $new_file){
+        try {
+            $sql = 'UPDATE product_images
+                    SET 
+                        link_hinh_anh = :new_file
+                    WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':newfile' => $new_file,
+                ':id' => $id,
+
+            ]);
+            //Lấy id sản phẩm vừa thêm
+            return true;
+        } catch(Exception $e){
+            echo "Lỗi".      $e->getMessage();
+        }
+    }
+    public function destroyAnhSanPham($id){
+        try {
+            $sql = "DELETE FROM product_images WHERE id = :id";
+    
+            $stmt = $this->conn->prepare($sql);
+    
+            $stmt->execute([
+                ':id' => $id
+            ]);
+    
+            return true;
+        } catch(Exception $e){
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    
 
 }
 

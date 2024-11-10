@@ -28,5 +28,6 @@ match ($act) {
     'san-pham' => (new AdminSanPhamController())->danhSachSanPham(),
     'create-san-pham' => (new AdminSanPhamController())->formAddSanPham(),
     'edit-san-pham' => (new AdminSanPhamController())->formEditSanPham(),
-   
+    'sua-album-anh-san-pham' => (new AdminSanPhamController())->editAnhSanPham(),
+    
 };
