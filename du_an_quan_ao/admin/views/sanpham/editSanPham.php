@@ -137,7 +137,7 @@
             <div class="card-body p-0">
                 <div class="padding">
                     <div class="table-responsive">
-                    <form action="'?act=sua-album-anh-san-pham" method="post" enctype="multipart/form-data">
+                    <form action="?act=sua-album-anh-san-pham" method="post" enctype="multipart/form-data">
                 
                         <table id="faqs" class="table table-hover">
                             <thead>

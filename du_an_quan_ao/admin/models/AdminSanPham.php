@@ -160,7 +160,7 @@ class AdminSanPham{
             $stmt = $this->conn->prepare($sql);
 
             $stmt->execute([
-                ':newfile' => $new_file,
+                ':new_file' => $new_file,
                 ':id' => $id,
 
             ]);

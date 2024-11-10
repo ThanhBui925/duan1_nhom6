@@ -204,6 +204,7 @@ class AdminSanPhamController{
           $product_id = $_POST['product_id'] ?? '';
           //Lấy danh sách ảnh sản phẩm hiện tại
           $listAnhSanPhamCurrent = $this->modelSanPham->getListAnhSanPham($product_id);
+          
           //Xử lý các ảnh được gửi từ form
           $img_array = $_FILES['img_array'];
           $img_delete = isset($_POST['img_delete']) ? explode(',', $_POST['img_delete']) : [];
@@ -223,6 +224,7 @@ class AdminSanPhamController{
             }
           }
           //Lưu ảnh mới vào db và xóa ảnh cũ
+          // var_dump($upload_file);die();
           foreach($upload_file as $file_info){
             if($file_info['id']){
               $old_file = $this->modelSanPham->getDetailAnhSanPham($file_info['id'])['link_hinh_anh'];
@@ -246,7 +248,7 @@ class AdminSanPhamController{
             }
           }
           echo "<script>
-            window.location.href = '" . BASE_URL_ADMIN . "?act=san-pham';
+            window.location.href = '" . BASE_URL_ADMIN . "?act=edit-san-pham&id_san_pham=". $product_id ."';
             </script>";
             exit();
       }
