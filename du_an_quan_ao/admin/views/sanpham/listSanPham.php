@@ -68,7 +68,7 @@
                           <td><?= $sanPham["ten_danh_muc"] ?></td>
                           <td><?= $sanPham["trang_thai"] == 1 ? 'Còn hàng' : 'Hết hàng' ?></td>
                           <td>
-                            <a href="<?= BASE_URL_ADMIN.'?act=form-sua-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                            <a href="<?= BASE_URL_ADMIN.'?act=edit-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                               <button class="btn btn-warning">Sửa</button>
                             </a>
                             <button class="btn btn-danger">Xóa</button>

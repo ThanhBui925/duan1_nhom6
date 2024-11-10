@@ -89,14 +89,14 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Danh mục</label>
-                                    <select class="form-control" name="danh_muc_id" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="category_id" id="exampleFormControlSelect1">
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
                                         <?php foreach($listDanhMuc as $danhMuc): ?>
                                             <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
                                         <?php endforeach ?>
                                     </select>
-                                    <?php if(isset($errors['danh_muc_id'])): ?>
-                                        <p class="text-danger"><?= $errors['danh_muc_id'] ?></p>
+                                    <?php if(isset($errors['category_id'])): ?>
+                                        <p class="text-danger"><?= $errors['category_id'] ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group col-6">
