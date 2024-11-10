@@ -248,6 +248,7 @@ class AdminSanPhamController{
             }
           }
           echo "<script>
+            alert('Sửa album ảnh thành công');
             window.location.href = '" . BASE_URL_ADMIN . "?act=edit-san-pham&id_san_pham=". $product_id ."';
             </script>";
             exit();
