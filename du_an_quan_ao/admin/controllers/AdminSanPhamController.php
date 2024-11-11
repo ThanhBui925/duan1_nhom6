@@ -254,6 +254,9 @@ class AdminSanPhamController{
             exit();
       }
   }
+  public function deleteSanPham(){
+        
+  }
     //sửa album ảnh
 
     //k sửa ảnh cũ

@@ -25,7 +25,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-8">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Thêm sản phẩm</h3>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Danh mục</label>
-                                    <select class="form-control" name="category_id" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="danh_muc_id" id="exampleFormControlSelect1">
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
                                         <?php foreach($listDanhMuc as $danhMuc): ?>
                                             <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
@@ -119,8 +119,32 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
                             </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Hình ảnh sản phẩm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form class="mx-auto">
+                        <img style="width: 150px;" src= "<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
+                            onerror="this.onerror=null; this.src='data:image/jpeg;base64,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'"
+                            >
+                        </form>
+                        <div class="card-header">
+                            <h3 class="card-title">Album sản phẩm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form >
+                        <img style="width: 60px" src= "<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
+                            onerror="this.onerror=null; this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPEhANDQ0NDQ0NDw8NDQ0NDQ8PDQ0PFREWFhURFRUZHSgsGBolGxMTITEiJSk3Ly4uFx8/RDM4NzQtLysBCgoKDQ0NFg0FDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIARMAtwMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAAAQIDBQcIBAb/xABFEAACAgEBBQMFCwcNAAAAAAAAAQIDBBEFByExQQYSURMyNXSyFBciJFVhcZGUs9M0QlJicoGxM0NkZXN1g5KhosHR4//EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDdIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFq3JrhKEJ2Vwnc3GmEpxjK2Si5NQT856Jvh0QF0AAACy8qtWKh21q+UHbGlzj5WVaejmo83FNpagXgAAAAAAAAAAAAAAAAAAAAESkkm20kk223oklzbZ8J2l3s7Lwm642yzrlwcMNRnCL/WtbUfqbfzGuN728l5kpbO2fb8Rg+7fdB/lk0+KT61L/dz5aGqkBtDtBvt2hkJww6qdnxf50fjF/wBHekkl+6OprvL2tk3XLKuyb7MlSjOORO2bthKL1i4y1+Do+K05HjJA2jsTfhtCmKhl0Y+aopLynGi5/tOOqf8AlM17/wB/U/H+8OH3JpQgDau19+efanHExsbD1TXlJd6+2PzrvaL64s1xl7YybrnmW5N88py73uh2SVsX07sl5qXRLkeHQAbT7K7683H7tW0K459S0TtTVeWlrzcuU+Hik3pzN1dle1eHtSt24V3f7mnlaZru30t8lOHTrxXB6Pichnq2XtS/EsjkYl9mPdHzbKpOMtOsX4rhyfBgdmg+F3Y7wqtr1+St7lW0aY63UrhG6K/nq14eK6fRofdAAAAAAAAAAAAAAA0vvn3i93ymx9n2fC415+RB+b448H4/pPpy8dMvvd3jrBjLZ2BPXPsjpdbF6+44Ncv7Rrl4J6+Bz023xfFvi2+LbAgIEoCCSCQIYJIAAkAQyllTKWBfwM23HshkY9kqrqZKddkHpKMl1Ok92e8mrasVjZHco2lCPwq9dK8lJcZ1fP1cen0cuZC5j3zrlG2qcq7K5KcLIScZwknqpJrkwO1ga13U7y47SjHCzpRr2lBfBlwjDNil50V0sS5x681w1UdlAAAAAAAAAC3kVucJwjOVUpwlGNsO651trRTjqmtVz4roXAByP207OZOzcqzHzHKycpSthkvVrKjJt+V1fNt89eKepgTrbtv2To2tjSxr9IWR1njZCjrPHt04SXjF8nHqvn0a5b7Q7DyNn3zxMuvyd1fhxhbB+bZB/nRfR/8AOqAxpOhVXTOUZzhXOUKlF2zUW41Jy7qcn01bS49SlvoBSmVIpKkBAJIAAkgCGQVMjQCkaF3JxrKpOq6udVkdO9CyLhOOq1WqfLg0fZbsuwVu17lOyMobOpl8Zu5Ob018jX4yfDX9FPXnomGQ3R7vbNo2xzsh2UYGPYpRnCUq7cm6DTUK5LjGKa4zXHouOrj0kWcPFrphCmmEaqqoquuuC0jCKXBJF4AAAAAAAAAAABg+1nZPD2rUqc2rvOOvkb4NRvob5uEtOui1T1T0XAzgA1/297NYuJsPOxcKiFNcK67n3fPsnXbCXfnLnKWkebOaXzOs94/ovaPqd3snJjAhFaKUVICASNAIAAEMmEe81Fc5NRX73oRI9GzY63UrxuqX1zQHU/a/sHgbV8nLKqlG2pxSvpahbKtPV1SenGPP6NeHUz2zsGrGrhj41UKaKo92uuC0jFf966tvq2epkAAAAAAAAAAAAAAAAAfObx/Re0fU7vZOTDrLeT6L2j6pb/A5NAIqRSVIAAAIBJAESPbsOOuTjLxyaF9dkTxMyHZta5eGvHLxvvYgdjy5sglkAAAAAAAAAAAAAAAAAfN7yPRe0fVLvZOTUdabxPRe0fUr/YZyWgBUUlQABgAQSQBEjJdll8dwl/TMX76JjmZLsn+XYPruL99ADsNgMAAAAAAAAAAAAAAAAAfO7xfRe0fU7/ZOSzrPeN6L2j6nd7JyWBJUynQqAEEkASQAwDMn2T/LsH13F++gYwynZNa52B4+7cTh/jxA7BYDAAAAAAAAAAAAAAAAAHl2rs+vKptxb4uVN8HVZFScW4vno1yNd5W4/ZcnrXdn0/qxuqnBfP8ACg3/AKmzgBqG7cPjP+T2llR/boqn/Bo8tu4SP5m1pL9rCT/hYjdAA0n7wb+V4/YH+MPeEl8rx+wP8U3YANJrcI/leP7sD/1HvCS+V4/YH+MbsAGkveEl8rx+wP8AFMj2f3JRxcjHyrNpu33NfVkRrhhqvvuuamotux8G4robcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/Z'"
+                            >
                         </form>
                     </div>
                 </div>

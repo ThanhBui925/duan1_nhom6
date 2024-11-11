@@ -37,8 +37,8 @@
             </div>
             <form method="post" enctype="multipart/form-data">
                 
-            <div class="card-body">
-              <div class="form-group">
+            <div class="card-body row ">
+              <div class="form-group col-12">
                 <input type="hidden" name="product_id" value="<?= $sanPham['id'] ?>">
                 
                 <label for="ten_san_pham">Tên sản phẩm</label>
@@ -48,7 +48,7 @@
                 <?php endif; ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-6">
                 <label for="gia_san_pham">Giá sản phẩm</label>
                 <input type="number" id="gia_san_pham" name="gia_san_pham" class="form-control" value="<?=$sanPham['gia_san_pham']?>">
                 <?php if(isset($errors['gia_san_pham'])): ?>
@@ -56,7 +56,7 @@
                 <?php endif; ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-6">
                 <label for="gia_khuyen_mai">Giá khuyến mãi</label>
                 <input type="number" id="gia_khuyen_mai" name="gia_khuyen_mai" class="form-control" value="<?=$sanPham['gia_khuyen_mai']?>">
                 <?php if(isset($errors['gia_khuyen_mai'])): ?>
@@ -64,12 +64,12 @@
                 <?php endif; ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-12">
                 <label for="hinh_anh">Hình ảnh</label>
                 <input type="file" id="hinh_anh" name="hinh_anh" class="form-control">
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-6">
                 <label for="so_luong">Số lượng</label>
                 <input type="number" id="so_luong" name="so_luong" class="form-control" value="<?=$sanPham['so_luong']?>">
                 <?php if(isset($errors['so_luong'])): ?>
@@ -77,7 +77,7 @@
                 <?php endif; ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-6">
                 <label for="ngay_nhap">Ngày nhập</label>
                 <input type="date" id="ngay_nhap" name="ngay_nhap" class="form-control" value="<?=$sanPham['ngay_nhap']?>">
                 <?php if(isset($errors['ngay_nhap'])): ?>
@@ -85,7 +85,7 @@
                 <?php endif; ?>
               </div>
 
-              <div class="form-group">
+              <div class="form-group col-6">
                 <label for="inputStatus">Danh mục sản phẩm</label>
                 <select id="inputStatus" name="category_id" class="form-control custom-select">
                   <?php foreach($listDanhMuc as $danhMuc): ?>
@@ -97,7 +97,7 @@
                     <p class="text-danger"><?= $errors['category_id'] ?></p>
                 <?php endif; ?>
               </div>
-              <div class="form-group">
+              <div class="form-group col-6">
                 <label for="trang_thai">Trạng thái sản phẩm</label>
                 <select id="trang_thai" name="trang_thai" class="form-control custom-select">
                     <option <?= $sanPham['trang_thai'] == 1 ? 'selected' : '' ?> value="1">Còn hàng</option>
@@ -108,14 +108,14 @@
                     <p class="text-danger"><?= $errors['category_id'] ?></p>
                 <?php endif; ?>
               </div>
-              <div class="form-group">
+              <div class="form-group col 12">
                 <label for="mo_ta">Mô tả sản phẩm</label>
                 <textarea id="mo_ta" name="mo_ta" class="form-control" rows="4"><?= $sanPham['mo_ta'] ?></textarea>
               </div>
             </div>
             <!-- /.card-body -->
              <div class="card-footer text-center">
-                <button type="submit" class="btn btn-primary">Sửa thông tin</button>
+                <button type="submit" class="btn btn-success">Sửa thông tin</button>
              </div>
         </div>
     </form>
@@ -124,8 +124,8 @@
         <div class="col-md-4">
           
           <!-- /.card -->
-          <div class="card card-info">
-            <div class="card-header">
+          <div class="card card-info card-warning">
+            <div class="card-header card-warning">
               <h3 class="card-title">Album ảnh sản phẩm</h3>
             
               <div class="card-tools">
@@ -169,7 +169,7 @@
             </div>
              <!-- /.card-body -->
              <div class="card-footer text-center">
-                <button type="submit" class="btn btn-primary">Sửa album</button>
+                <button type="submit" class="btn btn-success">Sửa album</button>
              </div>
              </form>
 
@@ -180,7 +180,7 @@
       <div class="row">
         <div class="col-12">
           <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Save Changes" class="btn btn-success float-right">
+          <!-- <input type="submit" value="Save Changes" class="btn btn-success float-right"> -->
         </div>
       </div>
     </section>
