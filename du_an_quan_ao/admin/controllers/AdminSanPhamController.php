@@ -255,8 +255,31 @@ class AdminSanPhamController{
       }
   }
   public function deleteSanPham(){
-        
-  }
+    $id = $_GET['id_san_pham'];
+    $sanPham = $this->modelSanPham->getDetailSanPham($id);
+    $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+    
+    if ($sanPham) {
+        // Kiểm tra và xóa ảnh sản phẩm trong bảng product_images trước
+        if ($listAnhSanPham) {
+            foreach ($listAnhSanPham as $key => $anhSP) {
+                deleteFile($anhSP['link_hinh_anh']); // Xóa file ảnh vật lý (nếu cần)
+                $this->modelSanPham->destroyAnhSanPham($anhSP['id']); // Xóa ảnh trong db
+            }
+        }
+
+        // Sau khi xóa ảnh xong, xóa sản phẩm
+        deleteFile($sanPham['hinh_anh']); // Xóa file ảnh chính của sản phẩm (nếu cần)
+        $this->modelSanPham->destroySanPham($id);
+
+        // Xác nhận xóa thành công
+        echo "<script>
+                alert('Xóa thành công sản phẩm');
+                window.location.href = '" . BASE_URL_ADMIN . "?act=san-pham';
+              </script>";
+        exit();
+    }
+}
     //sửa album ảnh
 
     //k sửa ảnh cũ

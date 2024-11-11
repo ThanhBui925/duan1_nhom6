@@ -89,12 +89,18 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Danh mục</label>
-                                    <select class="form-control" name="danh_muc_id" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="category_id" id="exampleFormControlSelect1">
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
                                         <?php foreach($listDanhMuc as $danhMuc): ?>
-                                            <option value="<?= $danhMuc['id'] ?>"><?= $danhMuc['ten_danh_muc'] ?></option>
+                                            <option 
+                                                value="<?= $danhMuc['id'] ?>" 
+                                                <?= (isset($_POST['category_id']) && $_POST['category_id'] == $danhMuc['id']) ? 'selected' : '' ?>
+                                            >
+                                                <?= $danhMuc['ten_danh_muc'] ?>
+                                            </option>
                                         <?php endforeach ?>
                                     </select>
+
                                     <?php if(isset($errors['category_id'])): ?>
                                         <p class="text-danger"><?= $errors['category_id'] ?></p>
                                     <?php endif; ?>
@@ -103,9 +109,10 @@
                                     <label>Trạng thái</label>
                                     <select class="form-control" name="trang_thai" id="exampleFormControlSelect1">
                                         <option selected disabled>Chọn trạng thái sản phẩm</option>
-                                        <option value="1">Còn hàng</option>
-                                        <option value="2">Hết hàng</option>
+                                        <option value="1" <?= (isset($_POST['trang_thai']) && $_POST['trang_thai'] == '1') ? 'selected' : '' ?>>Còn hàng</option>
+                                        <option value="2" <?= (isset($_POST['trang_thai']) && $_POST['trang_thai'] == '2') ? 'selected' : '' ?>>Hết hàng</option>
                                     </select>
+
                                     <?php if(isset($errors['trang_thai'])): ?>
                                         <p class="text-danger"><?= $errors['trang_thai'] ?></p>
                                     <?php endif; ?>
