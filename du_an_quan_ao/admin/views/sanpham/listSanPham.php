@@ -109,7 +109,6 @@
 <!-- footer -->
  <?php include "./views/layout/footer.php" ?>
 <!-- end footer -->
-<!-- Page specific script -->
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -127,6 +126,5 @@
     });
   });
 </script>
-<!-- Code injected by live-server -->
 </body>
 </html>

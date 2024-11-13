@@ -2,7 +2,7 @@
     <div class="float-right d-none d-sm-block">
      By <b>Nhóm 6</b> 3.2.0
     </div>
-    <strong>Website bán công sở nam</strong> All rights reserved.
+    <strong>Website công sở nam</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->

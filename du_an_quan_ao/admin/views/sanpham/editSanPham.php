@@ -125,6 +125,15 @@
           
           <!-- /.card -->
           <div class="card card-info card-warning">
+            <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">Hình ảnh sản phẩm</h3>
+                    </div>
+                    <form class="mx-auto">
+                        <img id="imagePreview" style="width: 150px;" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="" onerror="this.onerror=null; this.src=''">
+                    </form>
+                <!-- </div> -->
+            </div>
             <div class="card-header card-warning">
               <h3 class="card-title">Album ảnh sản phẩm</h3>
             
@@ -254,6 +263,19 @@ function removeRow(rowId, imgId){
         imgDeleteInput.value = currentValue ? currentValue + ',' + imgId : imgId;
     }
 }
+
+function previewImage(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('imagePreview');
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 
 </script>
