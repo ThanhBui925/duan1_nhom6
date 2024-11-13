@@ -16,7 +16,9 @@ $act = $_GET['act'] ?? '/';
 
 
 match ($act) {
+    '/' => (new AdminDanhMucController())->danhSachDanhMuc(),
     // route danh mục
+    
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
     'form-create-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
     'create-danh-muc' => (new AdminDanhMucController())->AddDanhMuc(),

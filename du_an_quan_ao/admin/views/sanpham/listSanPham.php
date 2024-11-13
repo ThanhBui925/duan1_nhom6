@@ -39,7 +39,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
-                  <thead>
+                  <thead  class="text-center align-middle">
                   <tr>
                     <th>STT</th>
                     <th>Tên sản phẩm</th>
@@ -52,22 +52,22 @@
                   </tr>
                   </thead>
                   
-                  <tbody>
+                  <tbody class="text-center align-middle">
                     <?php foreach ($listSanPham as $key=>$sanPham):?>
                         <tr>
-                          <td><?= $key+1?></td>
-                          <td><?= $sanPham["ten_san_pham"] ?></td>
-                          <td>
-                            <img style="width: 60px" src= "<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
+                          <td style="vertical-align: middle;"><?= $key+1?></td>
+                          <td style="vertical-align: middle;"><?= $sanPham["ten_san_pham"] ?></td>
+                          <td style="vertical-align: middle;">
+                            <img style="width: 60px; height: 70px" src= "<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
                             onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg2IWOhm7wMIde-u1ePywcsBY6iN1--pwXCQ&s'"
                             >
                             
                           </td>
-                          <td><?= $sanPham["gia_san_pham"] ?></td>
-                          <td><?= $sanPham["so_luong"] ?></td>
-                          <td><?= $sanPham["ten_danh_muc"] ?></td>
-                          <td><?= $sanPham["trang_thai"] == 1 ? 'Còn hàng' : 'Hết hàng' ?></td>
-                          <td>
+                          <td style="vertical-align: middle;"><?= $sanPham["gia_san_pham"] ?></td>
+                          <td style="vertical-align: middle;"><?= $sanPham["so_luong"] ?></td>
+                          <td style="vertical-align: middle;"><?= $sanPham["ten_danh_muc"] ?></td>
+                          <td style="vertical-align: middle;"><?= $sanPham["trang_thai"] == 1 ? 'Còn hàng' : 'Hết hàng' ?></td>
+                          <td style="vertical-align: middle;">
                             <a href="<?= BASE_URL_ADMIN.'?act=edit-san-pham&id_san_pham=' . $sanPham['id'] ?>">
                               <button class="btn btn-warning">Sửa</button>
                             </a>
@@ -80,7 +80,7 @@
                     <?php endforeach ?>
                   
                   </tbody>
-                  <tfoot>
+                  <tfoot class="text-center align-middle">
                   <tr>
                     <th>STT</th>
                     <th>Tên sản phẩm</th>
