@@ -9,8 +9,8 @@ class AdminSanPham{
     public function getAllSanPham(){
         try{
             $sql = "SELECT products.*, categories.ten_danh_muc
-        FROM products
-        INNER JOIN categories ON products.category_id = categories.id";
+                    FROM products
+                    INNER JOIN categories ON products.category_id = categories.id";
 
 
             $stmt = $this->conn->prepare($sql);
@@ -73,7 +73,10 @@ class AdminSanPham{
     }
     public function getDetailSanPham($id){
         try{
-            $sql = "SELECT * FROM products WHERE id = :id";
+            $sql = "SELECT products.*, categories.ten_danh_muc
+                    FROM products
+                    INNER JOIN categories ON products.category_id = categories.id
+                    WHERE products.id = :id";
 
             $stmt = $this->conn->prepare($sql);
 

@@ -68,12 +68,15 @@
                           <td style="vertical-align: middle;"><?= $sanPham["ten_danh_muc"] ?></td>
                           <td style="vertical-align: middle;"><?= $sanPham["trang_thai"] == 1 ? 'Còn hàng' : 'Hết hàng' ?></td>
                           <td style="vertical-align: middle;">
+                          <a href="<?= BASE_URL_ADMIN.'?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                              <button class="btn btn-success"><i class="fas fa-eye"></i></button>
+                            </a>
                             <a href="<?= BASE_URL_ADMIN.'?act=edit-san-pham&id_san_pham=' . $sanPham['id'] ?>">
-                              <button class="btn btn-warning">Sửa</button>
+                              <button class="btn btn-warning"><i class="fas fa-tools"></i></button>
                             </a>
                             <a href="<?= BASE_URL_ADMIN.'?act=xoa-san-pham&id_san_pham=' . $sanPham['id'] ?>"
                             onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không ?')">
-                              <button class="btn btn-danger">Xóa</button>
+                              <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                             </a>
                           </td>
                         </tr>

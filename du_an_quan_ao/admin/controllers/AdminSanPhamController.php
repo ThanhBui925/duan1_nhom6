@@ -280,6 +280,22 @@ class AdminSanPhamController{
         exit();
     }
 }
+public function detailSanPham(){
+  $id = $_GET['id_san_pham'];
+  $sanPham = $this->modelSanPham->getDetailSanPham($id);
+  $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+// var_dump($listAnhSanPham);die();
+  $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+  if($sanPham){
+    require_once './views/sanpham/detailSanPham.php';
+  }else{
+    echo "<script>
+    window.location.href = '" . BASE_URL_ADMIN . "?act=san-pham';
+    </script>";
+    exit();
+  }
+
+}
     //sửa album ảnh
 
     //k sửa ảnh cũ
