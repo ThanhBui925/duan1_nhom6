@@ -25,7 +25,7 @@
                <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
               <p><i class="nav-icon fas fa-tachometer-alt"></i>
-              Dashboard
+              Thống kê
               
               </p>
             </a>
@@ -33,7 +33,7 @@
           
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN.'?act=danh-muc' ?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <i class="nav-icon fas fa-table"></i>
               <p>
                 Danh mục sản phẩm
               </p>
@@ -51,7 +51,7 @@
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN.'?act=don-hang' ?>" class="nav-link">
               <!-- <i class="nav-icon fas fa-th"></i> -->
-              <i class="nav-icon fas fa-shopping-cart"></i>
+              <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Quản lý đơn hàng
               </p>
