@@ -22,124 +22,95 @@ class AdminDonHang{
             echo "Lỗi".      $e->getMessage();
         }
     }
-//     public function insertSanPham($ten_san_pham, $gia_san_pham, 
-//                                     $gia_khuyen_mai, $so_luong,
-//                                     $ngay_nhap, $danh_muc_id,
-//                                     $trang_thai, $mo_ta,
-//                                     $hinh_anh){
-//         try {
-//             $sql = "INSERT INTO products (ten_san_pham, gia_san_pham, 
-//                                             gia_khuyen_mai, so_luong,
-//                                             ngay_nhap, category_id,
-//                                             trang_thai, mo_ta,
-//                                             hinh_anh)
-//                                             VALUES (:ten_san_pham, :gia_san_pham, 
-//                                               :gia_khuyen_mai, :so_luong,
-//                                               :ngay_nhap, :category_id,
-//                                               :trang_thai, :mo_ta,
-//                                               :hinh_anh)";
 
-//             $stmt = $this->conn->prepare($sql);
+    public function getAllTrangThaiDonHang(){
+        try{
+            $sql = "SELECT * FROM order_status";
 
-//             $stmt->execute([
-//                 ':ten_san_pham' => $ten_san_pham,
-//                 ':gia_san_pham' => $gia_san_pham,
-//                 ':gia_khuyen_mai' => $gia_khuyen_mai,
-//                 ':so_luong' => $so_luong,
-//                 ':ngay_nhap' => $ngay_nhap,
-//                 ':category_id' => $danh_muc_id,
-//                 ':trang_thai' => $trang_thai,
-//                 ':mo_ta' => $mo_ta,
-//                 ':hinh_anh' => $hinh_anh,
-//             ]);
-//             //Lấy id sản phẩm vừa thêm
-//             return $this->conn->lastInsertId();
-//         } catch(Exception $e){
-//             echo "Lỗi".      $e->getMessage();
-//         }
-//     }
-//     public function insertAlbumAnhSanPham($product_id, $link_hinh_anh){
-//         try {
-//             $sql = "INSERT INTO product_images (product_id, link_hinh_anh) VALUE (:product_id, :link_hinh_anh)";
-//             $stmt = $this->conn->prepare($sql);
-//             $stmt->execute([
-//                 ':product_id' => $product_id,
-//                 ':link_hinh_anh' => $link_hinh_anh,
-//             ]);
-//             return true;
-//         } catch(Exception $e){
-//             echo "Lỗi".     $e->getMessage();
-//         }
-//     }
-//     public function getDetailSanPham($id){
-//         try{
-//             $sql = "SELECT products.*, categories.ten_danh_muc
-//                     FROM products
-//                     INNER JOIN categories ON products.category_id = categories.id
-//                     WHERE products.id = :id";
 
-//             $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
 
-//             $stmt->execute([':id'=>$id]);
+            $stmt->execute();
 
-//             return $stmt->fetch();
-//         }catch(Exception $e){
-//             echo "Lỗi".      $e->getMessage();
-//         }   
-//     }
-//     public function getListAnhSanPham($id){
-//         try{
-//             $sql = "SELECT * FROM product_images WHERE product_id = :id";
+            return $stmt->fetchAll();
+        }catch(Exception $e){
+            echo "Lỗi".      $e->getMessage();
+        }
+    }
+    public function getDetailDonHang($id){
+        try{
+            $sql = "SELECT orders.*,
+                            order_status.ten_trang_thai, 
+                            users.ho_ten, 
+                            users.email, 
+                            users.so_dien_thoai,
+                            payment_methods.ten_phuong_thuc
+                    FROM orders
+                    INNER JOIN order_status ON orders.order_status_id = order_status.id
+                    INNER JOIN users ON orders.user_id = users.id
+                    INNER JOIN payment_methods ON orders.payment_method_id = payment_methods.id
+                    WHERE orders.id = :id";
 
-//             $stmt = $this->conn->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
 
-//             $stmt->execute([':id'=>$id]);
+            $stmt->execute([':id'=>$id]);
 
-//             return $stmt->fetchAll();
-//         }catch(Exception $e){
-//             echo "Lỗi".      $e->getMessage();
-//         }   
-//     }
-//     public function updateSanPham($product_id,$ten_san_pham, $gia_san_pham, 
-//                                     $gia_khuyen_mai, $so_luong,
-//                                     $ngay_nhap, $danh_muc_id,
-//                                     $trang_thai, $mo_ta,
-//                                     $hinh_anh){
-//         try {
-//             $sql = 'UPDATE products
-//                     SET 
-//                         ten_san_pham = :ten_san_pham,
-//                         gia_san_pham = :gia_san_pham,
-//                         gia_khuyen_mai = :gia_khuyen_mai,
-//                         so_luong = :so_luong,
-//                         ngay_nhap = :ngay_nhap,
-//                         category_id = :danh_muc_id,
-//                         trang_thai = :trang_thai,
-//                         mo_ta = :mo_ta,
-//                         hinh_anh = :hinh_anh
-//                     WHERE id = :id';
+            return $stmt->fetch();
+        }catch(Exception $e){
+            echo "Lỗi".      $e->getMessage();
+        }   
+    }
 
-//             $stmt = $this->conn->prepare($sql);
+    public function getListSpDonHang($id){
+        try{
+            $sql = "SELECT oder_details.*, products.ten_san_pham
+                     FROM oder_details 
+                     INNER JOIN products ON oder_details.product_id = products.id
+                     WHERE oder_details.oder_id = :id";
 
-//             $stmt->execute([
-//                 ':ten_san_pham' => $ten_san_pham,
-//                 ':gia_san_pham' => $gia_san_pham,
-//                 ':gia_khuyen_mai' => $gia_khuyen_mai,
-//                 ':so_luong' => $so_luong,
-//                 ':ngay_nhap' => $ngay_nhap,
-//                 ':danh_muc_id' => $danh_muc_id,
-//                 ':trang_thai' => $trang_thai,
-//                 ':mo_ta' => $mo_ta,
-//                 ':hinh_anh' => $hinh_anh,
-//                 ':id' => $product_id,
+            $stmt = $this->conn->prepare($sql);
 
-//             ]);
-//             //Lấy id sản phẩm vừa thêm
-//             return true;
-//         } catch(Exception $e){
-//             echo "Lỗi".      $e->getMessage();
-//         }
-//     }
+            $stmt->execute([':id'=>$id]);
+
+            return $stmt->fetchAll();
+        }catch(Exception $e){
+            echo "Lỗi".      $e->getMessage();
+        }   
+    }
+    
+
+    public function updateDonHang($id, $ten_nguoi_nhan,$sdt_nguoi_nhan, $email_nguoi_nhan, 
+                                    $dia_chi_nguoi_nhan, $ghi_chu,
+                                    $order_status_id){
+                                        // var_dump($id);die;
+        try {
+            $sql = 'UPDATE orders
+                    SET 
+                        ten_nguoi_nhan = :ten_nguoi_nhan,
+                        sdt_nguoi_nhan = :sdt_nguoi_nhan,
+                        email_nguoi_nhan = :email_nguoi_nhan,
+                        dia_chi_nguoi_nhan = :dia_chi_nguoi_nhan,
+                        ghi_chu = :ghi_chu,
+                        order_status_id = :order_status_id
+                    WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':ten_nguoi_nhan' => $ten_nguoi_nhan,
+                ':sdt_nguoi_nhan' => $sdt_nguoi_nhan,
+                ':email_nguoi_nhan' => $email_nguoi_nhan,
+                ':dia_chi_nguoi_nhan' => $dia_chi_nguoi_nhan,
+                ':ghi_chu' => $ghi_chu,
+                ':order_status_id' => $order_status_id,
+                ':id' => $id
+
+            ]);
+            return true;
+        } catch(Exception $e){
+            echo "Lỗi".      $e->getMessage();
+        }
+    }
 //     public function getDetailAnhSanPham($id){
 //         try{
 //             $sql = "SELECT * FROM product_images WHERE id = :id";

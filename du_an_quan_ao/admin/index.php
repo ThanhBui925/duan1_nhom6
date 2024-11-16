@@ -39,9 +39,8 @@ match ($act) {
 
     //route đơn hàng
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
-    'form-sua-don-hang' => (new AdminDonHangController())->danhSachDonHang(),
-    // 'edit-don-hang' => (new AdminDonHangController())->formEditDonHang(),
-    // 'xoa-don-hang' => (new AdminDonHangController())->deleteDonHang(),
-    // 'chi-tiet-don-hang' => (new AdminDonHangController())->detailSanPham(),
+    'form-sua-don-hang' => (new AdminDonHangController())->formEditDonHang(),
+    'edit-don-hang' => (new AdminDonHangController())->editDonHang(),
+    'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
     
 };

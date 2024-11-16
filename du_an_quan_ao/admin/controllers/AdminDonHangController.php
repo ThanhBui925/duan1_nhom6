@@ -13,96 +13,89 @@ class AdminDonHangController{
         // var_dump($listDonHang); die();
         require_once './views/donhang/listDonHang.php';
     }
+    public function detailDonHang(){
+        $order_id = $_GET['id_don_hang'];
+        // var_dump($order_id);die;
+        $donHang = $this->modelDonHang->getDetailDonHang($order_id);
+
+        //lấy danh sách sản phẩm của đơn hàng đăth ở bảng oder_details
+        $sanPhamDonHang = $this->modelDonHang->getListSpDonHang($order_id);
+        $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
+        // var_dump($sanPhamDonHang);die;
+        require_once './views/donhang/detailDonHang.php';
+    }
+    public function formEditDonHang(){
+        $order_id = $_GET['id_don_hang'];
+        // var_dump($order_id);die;
+        $donHang = $this->modelDonHang->getDetailDonHang($order_id);
+        // var_dump($donHang);die;
+        $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
+        if($donHang){
+            require_once  './views/donhang/editDonHang.php';
+        }else{
+            echo "<script>
+            window.location.href = '" . BASE_URL_ADMIN . "?act=don-hang';
+             </script>";
+             exit();
+        }
+    }
     
-//     public function formEditSanPham(){
-//       $id = $_GET['id_san_pham'];
-//       $sanPham = $this->modelSanPham->getDetailSanPham($id);
-//       $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
-//     // var_dump($listAnhSanPham);die();
-//       $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
-//       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-//         //Lấy dữ liệu
-//         //Lấy dữ liệu cũ của sản phẩm
-//         $product_id = $_POST['product_id'] ?? '';
-//         //truy vấn
-//         $sanPhamOld = $this->modelSanPham->getDetailSanPham($product_id);
-//         $old_file = $sanPhamOld['hinh_anh']; //Lấy ảnh cũ để phục vụ cho sửa ảnh
+    public function editDonHang(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        //Lấy dữ liệu
+        //Lấy dữ liệu cũ của sản phẩm
+        $order_id = $_POST['id_don_hang'] ?? '';
+        //truy vấn
 
-//         $ten_san_pham = $_POST['ten_san_pham'] ?? '';
-//         $gia_san_pham = $_POST['gia_san_pham'] ?? '';
-//         $gia_khuyen_mai = $_POST['gia_khuyen_mai'] ?? '';
-//         $so_luong = $_POST['so_luong'] ?? '';
-//         $ngay_nhap = $_POST['ngay_nhap'] ?? '';
-//         $category_id = $_POST['category_id'] ?? '';
-//         $trang_thai = $_POST['trang_thai'] ?? '';
-//         $mo_ta = $_POST['mo_ta'] ?? '';
-//         $hinh_anh = $_FILES['hinh_anh'] ?? null;
-
-//         $img_array = $_FILES['img_array'];
+        $ten_nguoi_nhan = $_POST['ten_nguoi_nhan'] ?? '';
+        $sdt_nguoi_nhan = $_POST['sdt_nguoi_nhan'] ?? '';
+        $email_nguoi_nhan = $_POST['email_nguoi_nhan'] ?? '';
+        $dia_chi_nguoi_nhan = $_POST['dia_chi_nguoi_nhan'] ?? '';
+        $ghi_chu = $_POST['ghi_chu'] ?? '';
+        $trang_thai_id = $_POST['order_status_id'] ?? '';
         
-//         $moTa = $_POST['mo_ta'];
-//         // tạo 1 mảng rỗng chứa dữ liệu
-//         $errors = [];
-//         if(empty($ten_san_pham)){
-//           $errors['ten_san_pham'] = 'Tên sản phẩm không được bỏ trống';
-//           // return;
-//         }
-//         if(empty($gia_san_pham)){
-//           $errors['gia_san_pham'] = 'Giá sản phẩm không được bỏ trống';
-//         }
-//         if(empty($gia_khuyen_mai)){
-//           $errors['gia_khuyen_mai'] = 'Giá khuyến mãi không được bỏ trống';
-//         }
-//         if(empty($so_luong)){
-//           $errors['so_luong'] = 'Số lượng không được bỏ trống';
-//         }
-//         if(empty($ngay_nhap)){
-//           $errors['ngay_nhap'] = 'Ngày nhập không được bỏ trống';
-//         }
-//         if(empty($category_id)){
-//           $errors['category_id'] = 'Danh mục sản phẩm phải được chọn';
-//         }
-//         if(empty($trang_thai)){
-//           $errors['trang_thai'] = 'Trạng thái phải được chọn';
-//         }
+
+        // tạo 1 mảng rỗng chứa dữ liệu
+        $errors = [];
+        if(empty($ten_nguoi_nhan)){
+          $errors['$ten_nguoi_nhan'] = 'Tên người nhận không được bỏ trống';
+          // return;
+        }
+        if(empty($sdt_nguoi_nhan)){
+          $errors['sdt_nguoi_nhan'] = 'Số điện thoại không được bỏ trống';
+        }
+        if(empty($email_nguoi_nhan)){
+          $errors['email_nguoi_nhan'] = 'Email không được bỏ trống';
+        }
+        if(empty($dia_chi_nguoi_nhan)){
+          $errors['dia_chi_nguoi_nhan'] = 'Địa chỉ người nhận không được bỏ trống';
+        }
         
-//         $_SESSION['error'] = $errors;
-//         //logic sửa ảnh
-//         if(isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK){
-//           //Upload ảnh mới
-//           $new_file = uploadFile($hinh_anh, './uploads/');
+        if(empty($trang_thai_id)){
+          $errors['order_status_id'] = 'Trạng thái phải được chọn';
+        }
+        
+        $_SESSION['error'] = $errors;
+        if(empty($errors)){
+           $result = $this->modelDonHang->updateDonHang($order_id,$ten_nguoi_nhan,$sdt_nguoi_nhan, $email_nguoi_nhan, 
+                                              $dia_chi_nguoi_nhan, $ghi_chu,
+                                              $trang_thai_id);
 
-//           if(!empty($old_file)){ //Nếu có ảnh cũ thì xóa đi
-//             deleteFile($old_file);
-//           }
-//         }else{
-//           $new_file = $old_file;
-//         }
+            // var_dump($result);die();
+            echo "<script>
+            alert('Sửa đơn hàng thành công thành công');
+            window.location.href = '" . BASE_URL_ADMIN . "?act=don-hang';
+            </script>";
+            exit();
+        }else{
+          $_SESSION['flash'] = true;
+          header("Location: " . BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $order_id);
+            exit();
+          //trả lỗi về form
+        }
+      }
 
-//         //Nếu k có lỗi thì tiến hành thêm sản phẩm
-//         // var_dump($_POST);die();
-//         if(empty($errors)){
-//            $result = $this->modelSanPham->updateSanPham($product_id,$ten_san_pham, $gia_san_pham, 
-//                                               $gia_khuyen_mai, $so_luong,
-//                                               $ngay_nhap, $category_id,
-//                                               $trang_thai, $mo_ta,
-//                                               $new_file);
-
-//             // var_dump($result);die();
-//             echo "<script>
-//             alert('Sửa sản phẩm thành công thành công');
-//             window.location.href = '" . BASE_URL_ADMIN . "?act=san-pham';
-//             </script>";
-//             exit();
-//         }else{
-//           require_once './views/sanpham/editSanPham.php';
-//           //trả lỗi về form
-//         }
-//       } else {
-//           require_once './views/sanpham/editSanPham.php';
-//       }
-
-//     }
+    }
 //     public function editAnhSanPham(){
 //       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 //           $product_id = $_POST['product_id'] ?? '';
